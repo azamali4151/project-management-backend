@@ -26,7 +26,6 @@ class TaskController extends Controller
 
     public function store(Request $request)
     {
-        //dd('here');
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -41,9 +40,11 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'title' => 'required|string|max:255',
+           'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'completed' => 'boolean',
+            'project_id' => 'required',
+            'due_date' => 'required',
+            'status' => 'required',
         ]);
 
         return response()->json($this->taskRepository->update($id, $data));
